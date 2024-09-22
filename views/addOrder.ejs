@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header con barra de navegación -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="/">
+                <img src="resources/src/images/tracetexIcon.png" alt="tracetexIcon" class="logo-img">
+            </a>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/profile" class="nav-link">Perfil</a></li>
+                <li class="nav-item"><a href="/settings" class="nav-link">Configuración</a></li>
+                <li class="nav-item"><a href="/logout" class="nav-link">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="containerIndex">
+    
+        <div class="content">
+            <% if (login) { %>
+                <h2 class="welcome-message">¡Bienvenido, <%= name %>!</h2>
+                <div class="dashboard">
+                    <section class="dashboard-section">
+                        <h3 class="dashboard-title">Panel de Control</h3>
+                        <p class="dashboard-description">Visualiza el estado de los procesos.</p>
+                        <h3 class="dashboard-title">Procesos</h3>
+                        <div class="dashboard-options">
+                            <div class="card">
+                                <h4 class="card-title">Dashboard</h4>
+                                <i class="fa-solid fa-chart-line icon-p2"></i>
+                                <p class="card-description">Dashboard general</p>
+                                <a href="/dashboard" class="btn">Ver resumen</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Entregados</h4>
+                                <i class="fa-regular fa-circle-check icon-p"></i>
+                                <p class="card-description">Procesos entregados</p>
+                                <a href="/delivered" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">En proceso</h4>
+                                <i class="fa-regular fa-clock icon-p"></i>
+                                <p class="card-description">Procesos pendientes</p>
+                                <a href="/progress" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">No entregados</h4>
+                                <i class="fa-regular fa-circle-xmark icon-p"></i>
+                                <p class="card-description">Procesos no entregados</p>
+                                <a href="/failed" class="btn">Ver progreso</a>
+                            </div>
+                        </div>
+                        <h3 class="dashboard-title">Productos</h3>
+                        <div class="dashboard-options">
+                            <div class="card">
+                                <h4 class="card-title">Opción 1</h4>
+                                <p class="card-description">Accede a tus proyectos.</p>
+                                <a href="/projects" class="btn">Ver proyectos</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 2</h4>
+                                <p class="card-description">Monitorea tu progreso.</p>
+                                <a href="/progress" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 3</h4>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Configuración</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 4</h4>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Configuración</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            <% } else { %>
+                <p class="welcome-guest">Hola, <%= name %>. Inicia sesión para continuar.</p>
+                <a href="/login" class="btn">Iniciar sesión</a>
+                <a href="/register" class="btn">Registrarse</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="bubble-menu">
+        <i class="fa-solid fa-plus"></i>
+        <div class="menu-items">
+            <a href="/addOrder">Agregar orden</a>
+            <a href="/searchOrder">Buscar orden</a>
+            <a href="/addProduct">Agregar producto</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Tracetex. Todos los derechos reservados.</p>
+            <ul class="footer-links">
+                <li><a href="/privacy">Política de Privacidad</a></li>
+                <li><a href="/terms">Términos de Servicio</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <script src="resources/src/js/menu.js"></script>
+</body>
+</html>

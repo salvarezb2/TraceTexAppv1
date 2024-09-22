@@ -176,6 +176,59 @@ app.get('/logout', (req, res)=>{
     })
 })
 
+
+//14. rutas burbuja
+app.get('/addOrder', (req, res) => {
+    res.render('addOrder', {
+        login: req.session.loggedin || false,
+        name: req.session.name || ''
+    });
+});
+
+app.get('/searchOrder', (req, res) => {
+    res.render('searchOrder', {
+        login: req.session.loggedin || false,
+        name: req.session.name || ''
+    });
+});
+
+app.get('/addProduct', (req, res) => {
+    res.render('addProduct', {
+        login: req.session.loggedin || false,
+        name: req.session.name || ''
+    });
+});
+
+
+//15. agregar productos
+app.post('/addProduct', (req, res) => {
+    const { productName, description, quantities, price } = req.body;
+
+    req.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).send('Error en la conexión a la base de datos');
+        }
+
+        const newProduct = {
+            productName,
+            description,
+            quantities,
+            price
+        };
+
+        connection.query('INSERT INTO product SET ?', newProduct, (error, results) => {
+            if (error) {
+                return res.status(500).send('Error al agregar el producto');
+            }
+
+            res.json({ success: true, product: { idProduct: results.insertId, ...newProduct } });
+        });
+    });
+});
+
+
+
 app.listen(4000, (req, res)=>{
     console.log('Server is running on port http://localhost:4000');
 })
+

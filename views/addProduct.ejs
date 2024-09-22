@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header con barra de navegación -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="/">
+                <img src="resources/src/images/tracetexIcon.png" alt="tracetexIcon" class="logo-img">
+            </a>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/profile" class="nav-link">Perfil</a></li>
+                <li class="nav-item"><a href="/settings" class="nav-link">Configuración</a></li>
+                <li class="nav-item"><a href="/logout" class="nav-link">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="containerIndex">
+    
+        <div class="content">
+            <% if (login) { %>
+                <h2 class="welcome-message">¡Bienvenido, <%= name %>!</h2>
+                <div class="dashboard">
+                    <section class="dashboard-section">
+                        <h3 class="dashboard-title">Productos</h3>
+                        <p class="dashboard-description">Visualiza el estado de los procesos.</p>
+                        <div class="actions">
+                            <button id="addProductButton" class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    
+                        <table id="productsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del Producto</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                    <td>
+                                        <button class="edit">
+                                            <i class="fa-solid fa-pencil"></i> Editar
+                                        </button>
+                                        <button class="delete">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se llenarán los productos -->
+                            </tbody>
+                        </table>
+                        
+                    </section>
+                </div>
+            <% } else { %>
+                <p class="welcome-guest">Hola, <%= name %>. Inicia sesión para continuar.</p>
+                <a href="/login" class="btn">Iniciar sesión</a>
+                <a href="/register" class="btn">Registrarse</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="bubble-menu">
+        <i class="fa-solid fa-plus"></i>
+        <div class="menu-items">
+            <a href="/addOrder">Agregar orden</a>
+            <a href="/searchOrder">Buscar orden</a>
+            <a href="/addProduct">Agregar producto</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Tracetex. Todos los derechos reservados.</p>
+            <ul class="footer-links">
+                <li><a href="/privacy">Política de Privacidad</a></li>
+                <li><a href="/terms">Términos de Servicio</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <div id="addProductModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Agregar producto</h2>
+            <form id="addProductForm">
+                <input type="text" id="productName" placeholder="Nombre del producto" required>
+                <input type="text" id="description" placeholder="Descripción" required>
+                <input type="number" id="quantities" placeholder="Cantidad" required>
+                <input type="number" id="price" placeholder="Precio" required>
+                <button type="submit"><i class="fa-solid fa-plus"></i></button>
+                <button type="button" id="cancel-btn">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+    <script src="resources/src/js/menu.js"></script>
+    <script src="resources/src/js/addProduct.js"></script>
+</body>
+</html>
