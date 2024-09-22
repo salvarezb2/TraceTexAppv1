@@ -1,6 +1,7 @@
 //1. invocar express
 const express = require('express');
 const app = express();
+const axios = require('axios');
 
 //2. urlencoded para capturar datos del formulario
 app.use(express.urlencoded({extended:false}));
@@ -110,15 +111,40 @@ app.post('/auth', async (req, res) => {
                 });
             } else {
                 req.session.loggedin = true;
-                req.session.name = results[0].name
-                res.render('login',{
+                req.session.name = results[0].name;
+
+                // Aquí se hace la solicitud de geolocalización
+                const address = 'Ciudad de Guatemala'; // Cambia la dirección si es necesario
+                const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+
+                try {
+                    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+                        params: {
+                            address: address,
+                            key: apiKey,
+                        },
+                    });
+
+                    if (response.data.status === 'OK') {
+                        // Obtener el nombre de la ciudad
+                        const components = response.data.results[0].address_components;
+                        const cityComponent = components.find(component => component.types.includes('locality'));
+                        req.session.city = cityComponent ? cityComponent.long_name : 'Ciudad no encontrada'; // Guardar la ciudad en la sesión
+                    } else {
+                        console.error('Error en la geocodificación:', response.data.status);
+                    }
+                } catch (error) {
+                    console.error('Error al hacer la solicitud:', error);
+                }
+
+                res.render('login', {
                     alert: true,
-                    alertTitle: "Conexion éxitosa",
+                    alertTitle: "Conexión éxitosa",
                     alertMessage: "¡Login éxitoso!",
                     alertIcon: 'success',
                     showConfirmButton: false,
                     timer: 1500,
-                    ruta:'' 
+                    ruta: ''
                 });
             }
         });        
@@ -130,7 +156,8 @@ app.get('/', (req, res) => {
     if (req.session.loggedin) {
         res.render('index', {
             login: true,
-            name: req.session.name
+            name: req.session.name,
+            city: req.session.city
         });
     } else {
         res.render('index', {

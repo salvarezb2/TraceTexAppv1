@@ -215,9 +215,8 @@ a {
 
 /* Header con barra de navegación */
 .main-header {
-    background-color: #333;
+    background-color: #bfbebe;
     color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -239,7 +238,6 @@ a {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 20px;
 }
 
 .nav-item {
@@ -251,6 +249,7 @@ a {
     text-decoration: none;
     padding: 8px 16px;
     transition: background-color 0.3s;
+    margin-right: 1em;
 }
 
 .nav-link:hover {
@@ -289,7 +288,7 @@ a {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: 20%;
 }
 
 .card-title {
@@ -305,7 +304,7 @@ a {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #0c234f;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -323,4 +322,112 @@ a {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: auto;
+}
+
+img.logo-img {
+    width: 15vw;
+}
+
+.content {
+    padding: 1.5em;
+}
+
+.footer {
+    background-color: #bfbebe;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.icon-p {
+    display: block; 
+    font-size: 5rem; 
+    margin: 10px 100px; 
+    color: #57636c;
+}
+.icon-p2 {
+    display: block; 
+    font-size: 5rem; 
+    margin: 10px 100px; 
+    color: #4ba7e6;
+}
+
+.content p {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.bubble-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #4ba7e6;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.bubble-menu:hover {
+    background-color: #007bff;
+}
+
+.menu-items {
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.bubble-menu.active .menu-items {
+    display: block;
+}
+
+.menu-items a {
+    display: block;
+    padding: 10px;
+    color: #4ba7e6;
+    text-decoration: none;
+}
+
+.menu-items a:hover {
+    background-color: #f1f1f1;
 }

@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Header con barra de navegación -->
     <header class="main-header">
         <div class="logo">
-            <img src="src/images" alt="TraceTex" class="logo-img">
+            <img src="resources/src/images/tracetexIcon.png" alt="tracetexIcon" class="logo-img">
         </div>
         <nav class="navbar">
             <ul class="nav-list">
@@ -27,10 +28,41 @@
         <div class="content">
             <% if (login) { %>
                 <h2 class="welcome-message">¡Bienvenido, <%= name %>!</h2>
+                <% if (city) { %>
+                    <i class="fa-solid fa-location-dot"></i> <%= city %>
+                <% } %>
                 <div class="dashboard">
                     <section class="dashboard-section">
                         <h3 class="dashboard-title">Panel de Control</h3>
                         <p class="dashboard-description">Aquí puedes ver el estado de tu cuenta y acceder a diversas funciones del sistema.</p>
+                        <h3 class="dashboard-title">Procesos</h3>
+                        <div class="dashboard-options">
+                            <div class="card">
+                                <h4 class="card-title">Dashboard</h4>
+                                <i class="fa-solid fa-chart-line icon-p2"></i>
+                                <p class="card-description">Accede a tus proyectos.</p>
+                                <a href="/projects" class="btn">Ver resumen</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Entregados</h4>
+                                <i class="fa-regular fa-circle-check icon-p"></i>
+                                <p class="card-description">Monitorea tu progreso.</p>
+                                <a href="/progress" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">En proceso</h4>
+                                <i class="fa-regular fa-clock icon-p"></i>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">No entregados</h4>
+                                <i class="fa-regular fa-circle-xmark icon-p"></i>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Ver progreso</a>
+                            </div>
+                        </div>
+                        <h3 class="dashboard-title">Productos</h3>
                         <div class="dashboard-options">
                             <div class="card">
                                 <h4 class="card-title">Opción 1</h4>
@@ -47,6 +79,11 @@
                                 <p class="card-description">Configura tu cuenta.</p>
                                 <a href="/settings" class="btn">Configuración</a>
                             </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 4</h4>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Configuración</a>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -57,5 +94,28 @@
             <% } %>
         </div>
     </div>
+
+    <div class="bubble-menu">
+        <i class="fa-solid fa-plus"></i>
+        <div class="menu-items">
+            <a href="/option1">Opción 1</a>
+            <a href="/option2">Opción 2</a>
+            <a href="/option3">Opción 3</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Tracetex. Todos los derechos reservados.</p>
+            <ul class="footer-links">
+                <li><a href="/privacy">Política de Privacidad</a></li>
+                <li><a href="/terms">Términos de Servicio</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <script src="resources/src/js/menu.js"></script>
 </body>
 </html>
