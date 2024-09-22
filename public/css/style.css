@@ -454,26 +454,54 @@ img.logo-img {
     width: 80%;
 }
 
+.login-title {
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding: 1em 3em 0px;
+}
+
+.welcome-guest{
+    padding: 1em 7em 0px;
+}
+
 .table {
-    width: 100%; /* Asegúrate de que la tabla use todo el ancho */
-    border-collapse: collapse; /* Combina bordes para evitar duplicados */
+    width: 100%; 
+    border-collapse: collapse;
 }
 
 .table th, .table td {
-    border: 1px solid #ddd; /* Borde claro entre celdas */
-    padding: 8px; /* Espacio dentro de las celdas */
-    text-align: left; /* Alinea el texto a la izquierda */
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
 
 .table th {
-    background-color: #f2f2f2; /* Color de fondo para el encabezado */
-    font-weight: bold; /* Resalta el texto del encabezado */
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
 .table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alterna el color de las filas */
+    background-color: #f9f9f9;
 }
 
 .table tr:hover {
-    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+    background-color: #f1f1f1;
+}
+
+.carousel-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-inner img {
+    width: 100%; /* Mantiene el ancho completo */
+    height: 350px;
+    object-fit: cover; /* Asegura que la imagen se ajuste sin deformarse */
+    opacity: 60%;
+}
+
+a.nav-link {
+    color: unset;
 }
