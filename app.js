@@ -51,6 +51,8 @@ app.use(myConnection(mysql, {
 app.post('/register', async (req, res) => {
     const user = req.body.user;
     const pass = req.body.pass;
+    const name = req.body.name;
+    const lastname = req.body.lastname;
     let passHash = await bcryptjs.hash(pass, 8);
     
     req.getConnection((err, connection) => {
@@ -59,7 +61,7 @@ app.post('/register', async (req, res) => {
             return res.status(500).send('Error en la conexión a la base de datos');
         }
 
-        connection.query('INSERT INTO users SET ?', { user: user, password: passHash }, (error, results) => {
+        connection.query('INSERT INTO users SET ?', { user: user, password: passHash, name: name, lastname: lastname }, (error, results) => {
             if (error) {
                 console.error('Error en la consulta:', error);
                 return res.status(500).send('Error en el registro');
