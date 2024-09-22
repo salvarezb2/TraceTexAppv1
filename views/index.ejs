@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
+<body>
+    <!-- Header con barra de navegación -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="src/images" alt="TraceTex" class="logo-img">
+        </div>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/profile" class="nav-link">Perfil</a></li>
+                <li class="nav-item"><a href="/settings" class="nav-link">Configuración</a></li>
+                <li class="nav-item"><a href="/logout" class="nav-link">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="containerIndex">
+    
+        <div class="content">
+            <% if (login) { %>
+                <h2 class="welcome-message">¡Bienvenido, <%= name %>!</h2>
+                <div class="dashboard">
+                    <section class="dashboard-section">
+                        <h3 class="dashboard-title">Panel de Control</h3>
+                        <p class="dashboard-description">Aquí puedes ver el estado de tu cuenta y acceder a diversas funciones del sistema.</p>
+                        <div class="dashboard-options">
+                            <div class="card">
+                                <h4 class="card-title">Opción 1</h4>
+                                <p class="card-description">Accede a tus proyectos.</p>
+                                <a href="/projects" class="btn">Ver proyectos</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 2</h4>
+                                <p class="card-description">Monitorea tu progreso.</p>
+                                <a href="/progress" class="btn">Ver progreso</a>
+                            </div>
+                            <div class="card">
+                                <h4 class="card-title">Opción 3</h4>
+                                <p class="card-description">Configura tu cuenta.</p>
+                                <a href="/settings" class="btn">Configuración</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            <% } else { %>
+                <p class="welcome-guest">Hola, <%= name %>. Inicia sesión para continuar.</p>
+                <a href="/login" class="btn">Iniciar sesión</a>
+                <a href="/register" class="btn">Registrarse</a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

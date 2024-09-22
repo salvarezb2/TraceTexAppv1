@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body{
+    font-family: Roboto;
+    margin: auto;
+    text-align: left;
+}
+
+.login-form, .contenedor{
+    width: 300px;
+    margin: auto;
+    padding: 0 20px 30px 20px;
+    margin-top: 120px;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.1);
+}
+.login-form h1{
+    text-align: left;
+    font-size: 22px;
+    padding: 100px 0 10px 0;
+}
+.login-form input[type="password"],
+.login-form input[type="text"]{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.btn-login{
+    width: 100%;
+    padding: 15px;
+    background-color: #38d1bf;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: large;
+    color: #ffffff;
+    border-radius: 30px;
+    text-decoration: none;
+}
+.btn-login:hover, .btn-login:active{
+    color: #fff;
+    background-color: #0ca593;
+    border-color: #0ca593;
+}
+.btn-login:focus{
+    box-shadow: 0 0 0 3px;
+}
+.btn-register{
+    width: 100%;
+    padding: 1px;
+    border: 0;
+    cursor: pointer;
+    font-size: large;
+    color: #002b52;
+    box-sizing: border-box;
+    margin-top: 15px;
+    font-size: 15px;
+    /*dar apariencia de un boton*/
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-align: center;
+    text-decoration: underline;
+}
+.register-form{
+    width: 400px;
+    margin: auto;
+    padding: 0 20px 60px 20px;
+    margin-top: 35px;
+    font-family: Roboto;
+    text-align: left;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.1);
+}
+.btn-save{
+    width: 35%;
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    background-color: #38d1bf;
+    color: #ffffff;
+    box-sizing: border-box;
+    margin-top: 20px;
+    font-size: 15px;
+    /*dar apariencia de un boton*/
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    border-radius: 30px;
+}
+.btn-save:hover, .btn-login:active{
+    color: #fff;
+    background-color: #0ca593;
+    border-color: #0ca593;
+}
+.btn-save:focus{
+    box-shadow: 0 0 0 3px;
+}
+.btn-cancel{
+    width: 35%;
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    background-color: #c4bebe;
+    color: #ffffff;
+    box-sizing: border-box;
+    margin-top: 20px;
+    font-size: 15px;
+    /*dar apariencia de un boton*/
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    border-radius: 30px;
+    text-align: center;
+}
+.btn-cancel:hover, .btn-login:active{
+    color: #fff;
+    background-color: #8d9291;
+    border-color: #8d9291;
+}
+.btn-cancel:focus{
+    box-shadow: 0 0 0 3px;
+}
+
+.register-form h1{
+    text-align: left;
+    font-size: 22px;
+    padding: 100px 0 10px 0;
+}
+.register-form input[type="password"],
+.register-form input[type="text"]{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.register-form, .contenedor{
+    width: 300px;
+    margin: auto;
+    margin-top: 120px;
+}
+.button-container {
+    display: flex;
+    justify-content: center;      
+    align-items: center;           
+    gap: 20px;                   
+}
+
+.container {
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 120px;
+}
+
+h1 {
+    text-align: left;
+    font-size: 22px;
+    padding: 100px 0 10px 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.content p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    margin-top: 90px;
+    margin-bottom: 56px;
+    text-align: left;
+    color: #002b52;
+
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-logout{
+    width: 100%;
+    padding: 15px;
+    background-color: #d13838;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: large;
+    color: #ffffff;
+    border-radius: 30px;
+    text-decoration: none;
+}
+.btn-logout:hover, .btn-logout:active{
+    color: #fff;
+    background-color: #a50c0c;
+    border-color: #a50c0c;
+}
+.btn-logout:focus{
+    box-shadow: 0 0 0 3px;
+}
+
+
+/* Header con barra de navegación */
+.main-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.main-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Navegación */
+.navbar {
+    display: flex;
+}
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #555;
+}
+
+/* Dashboard y tarjetas */
+.dashboard {
+    margin-top: 20px;
+}
+
+.dashboard-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.dashboard-description {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.dashboard-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.containerindex {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}

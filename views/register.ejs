@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
+<body>
+    <div class="register-form">
+        <h1>Registro</h1>
+        <form action="register" method="post">
+            <input type="text" name="user" placeholder="Usuario" required>
+            <input type="password" name="pass" placeholder="Contraseña" required>
+
+            <div class="button-container">
+                <a href="/" class="btn-cancel">Cancelar</a><input type="submit" class="btn-save" value="Guardar">
+            </div>
+            
+
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <% if (typeof alert != "undefined") { %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(() => {
+                window.location = '/<%= ruta %>';
+            });
+        </script>
+    <% } %>    
+
+</body>
+</html>
