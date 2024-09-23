@@ -226,6 +226,64 @@ app.post('/addProduct', (req, res) => {
     });
 });
 
+//16. agregar ordenes
+app.post('/addOrder', async (req, res) => {
+    const { products, quantities, supplierId } = req.body;
+
+    try {
+        const order = await db.query('INSERT INTO orderlist (supplierId, orderDate) VALUES (?, NOW())', [supplierId]);
+        const orderId = order.insertId;
+
+        for (let index = 0; index < products.length; index++) {
+            await db.query('INSERT INTO orderdetail (orderId, productId, quantity) VALUES (?, ?, ?)', [orderId, products[index], quantities[index]]);
+        }
+
+        res.json({ success: true, order: { idOrder: orderId, products, totalQuantity: quantities.reduce((a, b) => a + Number(b), 0), supplierName: supplierId, orderDate: new Date() } });
+    } catch (error) {
+        console.error('Error:', error);
+        res.json({ success: false, message: 'Error al agregar la orden' });
+    }
+});
+
+
+//17. Ruta para obtener proveedores desde la tabla de usuarios
+app.get('/getSuppliers', (req, res) => {
+    const query = 'SELECT id AS id, name AS name FROM users WHERE rol = 5';
+
+    req.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener proveedores' });
+        }
+
+        connection.query(query, (error, results) => {
+            if (error) {
+                return res.status(500).json({ error: 'Error al obtener proveedores' });
+            }
+            res.json(results);
+        });
+    });
+});
+
+//18. Ruta para obtener productos
+app.get('/getProducts', (req, res) => {
+    const query = 'SELECT idProduct AS id, productName AS name FROM product';
+
+    req.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener productos' });
+        }
+
+        connection.query(query, (error, results) => {
+            if (error) {
+                return res.status(500).json({ error: 'Error al obtener productos' });
+            }
+            res.json(results);
+        });
+    });
+});
+
+
+
 
 
 app.listen(4000, (req, res)=>{

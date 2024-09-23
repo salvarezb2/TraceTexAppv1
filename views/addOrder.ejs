@@ -52,37 +52,29 @@
                 <h2 class="welcome-message">¡Bienvenido, <%= name %>!</h2>
                 <div class="dashboard">
                     <section class="dashboard-section">
-                        <h3 class="dashboard-title">Productos</h3>
-                        <p class="dashboard-description">Inventario de productos.</p>
+                        <h3 class="dashboard-title">Órdenes</h3>
+                        <p class="dashboard-description">Listado de órdenes realizadas.</p>
                         <div class="actions">
-                            <button id="addProductButton" class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+                            <button id="addOrderButton" class="btn btn-primary" onclick="document.getElementById('addOrderModal').style.display='block';"><i class="fa-solid fa-plus"></i> Agregar Orden</button>
                         </div>
                     
-                        <table id="productsTable" class="table">
+                        <table id="ordersTable" class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nombre del Producto</th>
-                                    <th>Descripción</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
+                                    <th>Productos</th>
+                                    <th>Cantidad Total</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha de Orden</th>
                                     <th>Acciones</th>
-                                    <td>
-                                        <button class="edit">
-                                            <i class="fa-solid fa-pencil"></i> Editar
-                                        </button>
-                                        <button class="delete">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </button>
-                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Aquí se llenarán los productos -->
+                                <!-- Aquí se llenarán las órdenes -->
                             </tbody>
                         </table>
-                        
                     </section>
+                    
                 </div>
             <% } else { %>
                 <h3 class="login-title">¡Bienvenido!</h3>
@@ -150,20 +142,55 @@
         </div>
     </footer>
 
-    <div id="addProductModal" class="modal" style="display: none;">
+    <div id="addOrderModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close"><i class="fa-solid fa-xmark"></i></span>
-            <h2>Agregar producto</h2>
-            <form id="addProductForm">
-                <input type="text" id="productName" placeholder="Nombre del producto" required>
-                <input type="text" id="description" placeholder="Descripción" required>
-                <input type="number" id="quantities" placeholder="Cantidad" required>
-                <input type="number" id="price" placeholder="Precio" required>
-                <button type="submit"><i class="fa-solid fa-plus"></i></button>
+            <h2>Agregar Orden</h2>
+            <form id="addOrderForm">
+                <label for="supplierSelect">Proveedor</label>
+                <select id="supplierSelect" required>
+                    <!-- Opciones de proveedores se llenarán aquí -->
+                </select>
+                <br>
+                <label for="orderStatusSelect">Estado</label>
+                <select id="orderStatusSelect" required>
+                    <option value="created">Iniciada</option>
+                    <option value="inprocess">En proceso</option>
+                    <option value="delivered">Entregada</option>
+                    <option value="failed">No entregada</option>
+                </select>
+    
+                <h3>Agregar Productos</h3>
+                <div id="productsContainer">
+                    <div class="product-entry">
+                        <select class="productSelect" required>
+                            <!-- Opciones de productos se llenarán aquí -->
+                        </select>
+                        <input type="number" class="productQuantity" placeholder="Cantidad" required>
+                        <button type="button" class="removeProductButton">Eliminar</button>
+                    </div>
+                </div>
+    
+                <button type="button" id="addProductToOrder">Agregar Otro Producto</button>
+                <table id="orderDetailsTable">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los productos agregados se mostrarán aquí -->
+                    </tbody>
+                </table>
+    
+                <button type="submit"><i class="fa-solid fa-check"></i> Finalizar Orden</button>
                 <button type="button" id="cancel-btn">Cancelar</button>
             </form>
         </div>
     </div>
+    
+    
     
 
 
@@ -172,6 +199,6 @@
 
 
     <script src="resources/src/js/menu.js"></script>
-    <script src="resources/src/js/addProduct.js"></script>
+    <script src="resources/src/js/addOrder.js"></script>
 </body>
 </html>
