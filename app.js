@@ -113,6 +113,7 @@ app.post('/auth', async (req, res) => {
                 });
             } else {
                 req.session.loggedin = true;
+                req.session.idUser = results[0].id
                 req.session.name = results[0].name;
 
                 // Aquí se hace la solicitud de geolocalización
@@ -202,7 +203,7 @@ app.get('/addProduct', (req, res) => {
 
 //15. agregar productos
 app.post('/addProduct', (req, res) => {
-    const { productName, description, quantities, price } = req.body;
+    const { productName, description, quantity, price } = req.body;
 
     req.getConnection((err, connection) => {
         if (err) {
@@ -212,7 +213,7 @@ app.post('/addProduct', (req, res) => {
         const newProduct = {
             productName,
             description,
-            quantities,
+            quantity,
             price
         };
 
@@ -227,23 +228,88 @@ app.post('/addProduct', (req, res) => {
 });
 
 //16. agregar ordenes
-app.post('/addOrder', async (req, res) => {
-    const { products, quantities, supplierId } = req.body;
+app.post('/addOrder', (req, res) => {
+    const { products, quantity, status } = req.body;
+    const idUser = req.session.idUser;
 
-    try {
-        const order = await db.query('INSERT INTO orderlist (supplierId, orderDate) VALUES (?, NOW())', [supplierId]);
-        const orderId = order.insertId;
+    if (!idUser) {
+        return res.status(401).json({ success: false, message: 'Usuario no autenticado' });
+    }
 
-        for (let index = 0; index < products.length; index++) {
-            await db.query('INSERT INTO orderdetail (orderId, productId, quantity) VALUES (?, ?, ?)', [orderId, products[index], quantities[index]]);
+    // Validar que los arrays sean del mismo tamaño
+    if (!Array.isArray(products) || !Array.isArray(quantity) || products.length !== quantity.length) {
+        return res.status(400).json({ success: false, message: 'Los productos y cantidades deben ser arrays del mismo tamaño.' });
+    }
+
+    req.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).send('Error en la conexión a la base de datos');
         }
 
-        res.json({ success: true, order: { idOrder: orderId, products, totalQuantity: quantities.reduce((a, b) => a + Number(b), 0), supplierName: supplierId, orderDate: new Date() } });
-    } catch (error) {
-        console.error('Error:', error);
-        res.json({ success: false, message: 'Error al agregar la orden' });
-    }
+        // Iniciar transacción
+        connection.beginTransaction((err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: 'Error al iniciar la transacción' });
+            }
+
+            // Inserta la orden en order_list
+            connection.query('INSERT INTO order_list (idUser, status, dateCreation) VALUES (?, ?, NOW())', [idUser, status], (error, result) => {
+                if (error) {
+                    return connection.rollback(() => {
+                        res.status(500).json({ success: false, message: 'Error al agregar la orden', error: error.message });
+                    });
+                }
+
+                const orderId = result.insertId;
+
+                // Inserta los detalles de la orden en order_detail
+                const orderDetails = products.map((product, index) => [orderId, product, quantity[index]]);
+
+                connection.query('INSERT INTO order_detail (idOrder, idProduct, quantity) VALUES ?', [orderDetails], (error, results) => {
+                    if (error) {
+                        return connection.rollback(() => {
+                            res.status(500).json({ success: false, message: 'Error al agregar los detalles de la orden', error: error.message });
+                        });
+                    }
+
+                    // Obtener nombres de los productos
+                    const productIds = products.join(', ');
+                    connection.query(`SELECT idProduct, productName FROM product WHERE idProduct IN (${productIds})`, (error, productNames) => {
+                        if (error) {
+                            return connection.rollback(() => {
+                                res.status(500).json({ success: false, message: 'Error al obtener los nombres de los productos', error: error.message });
+                            });
+                        }
+
+                        // Confirmar la transacción
+                        connection.commit((err) => {
+                            if (err) {
+                                return connection.rollback(() => {
+                                    res.status(500).json({ success: false, message: 'Error al confirmar la orden', error: err.message });
+                                });
+                            }
+
+                            // Respuesta exitosa
+                            res.json({
+                                success: true,
+                                order: {
+                                    idOrder: orderId,
+                                    totalQuantity: quantity.reduce((a, b) => a + Number(b), 0),
+                                    status,
+                                    idUser,
+                                    dateCreation: new Date() // Fecha de creación de la orden
+                                },
+                                products: productNames // Aquí se incluyen los nombres de los productos
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });
+
+
 
 
 //17. Ruta para obtener proveedores desde la tabla de usuarios

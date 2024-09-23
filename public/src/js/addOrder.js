@@ -1,7 +1,27 @@
+// Función para cargar proveedores en el select
+function loadSuppliers() {
+    const supplierSelect = document.getElementById('supplierSelect');
+    supplierSelect.innerHTML = ''; // Limpiar opciones anteriores
+    fetch('/getSuppliers')
+        .then(response => response.json())
+        .then(suppliers => {
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.id; // Asegúrate de que este campo coincida con tu modelo
+                option.textContent = supplier.name; // Cambia esto según tu modelo
+                supplierSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error loading suppliers:', error));
+}
+
 // Abrir el modal para agregar la orden
 document.getElementById('addOrderButton').onclick = function() {
     document.getElementById('addOrderModal').style.display = 'block';
-
+    
+    // Cargar proveedores
+    loadSuppliers();
+    
     // Llenar el primer select de productos
     const firstProductSelect = document.querySelector('.productSelect');
     loadProducts(firstProductSelect);
@@ -52,15 +72,22 @@ document.getElementById('addProductToOrder').onclick = function() {
 document.getElementById('addOrderForm').onsubmit = function(event) {
     event.preventDefault();
 
-    const supplierId = document.getElementById('supplierSelect').value;
+    const status = document.getElementById('orderStatusSelect').value;
+    const statusText = orderStatusSelect.options[orderStatusSelect.selectedIndex].text;
     const products = Array.from(document.querySelectorAll('.productSelect')).map(select => select.value);
-    const quantities = Array.from(document.querySelectorAll('.productQuantity')).map(input => input.value);
+    const quantity = Array.from(document.querySelectorAll('.productQuantity')).map(input => input.value);
 
     // Verificar que haya productos y cantidades
-    if (products.length === 0 || quantities.length === 0) {
+    if (products.length === 0 || quantity.length === 0) {
         alert('Debe agregar al menos un producto con su cantidad.');
         return;
     }
+
+    console.log({
+        status,
+        products,
+        quantity
+    });
 
     // Enviar los datos al servidor para crear la orden
     fetch('/addOrder', {
@@ -69,9 +96,9 @@ document.getElementById('addOrderForm').onsubmit = function(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            supplierId,
+            status,
             products,
-            quantities
+            quantity
         })
     })
     .then(response => response.json())
@@ -81,24 +108,32 @@ document.getElementById('addOrderForm').onsubmit = function(event) {
             const orderDetailsTableBody = document.querySelector('#orderDetailsTable tbody');
             orderDetailsTableBody.innerHTML = ''; // Limpiar la tabla
 
-            products.forEach((product, index) => {
-                const newRow = `
-                    <tr>
-                        <td>${data.products[index].productName}</td>
-                        <td>${quantities[index]}</td>
-                    </tr>
-                `;
-                orderDetailsTableBody.insertAdjacentHTML('beforeend', newRow);
-            });
+
+            const productNames = data.products.map(product => product.productName).join(', ');
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                return new Intl.DateTimeFormat('es-GT', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                }).format(date);
+            };
 
             // Actualizar la tabla de órdenes principales
             const ordersTableBody = document.querySelector('#ordersTable tbody');
+            const formattedDate = formatDate(data.order.dateCreation);
             const newRow = `
                 <tr>
                     <td>${data.order.idOrder}</td>
-                    <td>${data.order.supplierName}</td>
+                    <td>${productNames}</td>
                     <td>${data.order.totalQuantity}</td>
-                    <td>${data.order.orderDate}</td>
+                    <td>${data.order.dateCreation}</td>
+                    <td>${formattedDate}</td>
+                    <td>${statusText}</td>
                     <td><button class="edit">Editar</button> <button class="delete">Eliminar</button></td>
                 </tr>
             `;
@@ -112,13 +147,14 @@ document.getElementById('addOrderForm').onsubmit = function(event) {
     .catch(error => console.error('Error:', error));
 };
 
+
 // Función para cargar productos en el select
 function loadProducts(selectElement) {
     fetch('/getProducts') // Cambia esta URL según tu configuración
         .then(response => response.json())
         .then(data => {
             selectElement.innerHTML = ''; // Limpiar opciones anteriores
-            data.products.forEach(product => {
+            data.forEach(product => {
                 const option = document.createElement('option');
                 option.value = product.id; // Ajusta según la estructura de tu producto
                 option.textContent = product.name; // Ajusta según la estructura de tu producto

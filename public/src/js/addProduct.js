@@ -18,7 +18,7 @@ document.getElementById('addProductForm').onsubmit = function(event) {
     
     const productName = document.getElementById('productName').value;
     const description = document.getElementById('description').value;
-    const quantities = document.getElementById('quantities').value;
+    const quantity = document.getElementById('quantity').value;
     const price = document.getElementById('price').value;
 
     fetch('/addProduct', {
@@ -29,7 +29,7 @@ document.getElementById('addProductForm').onsubmit = function(event) {
         body: JSON.stringify({
             productName,
             description,
-            quantities,
+            quantity,
             price
         })
     })
@@ -42,7 +42,7 @@ document.getElementById('addProductForm').onsubmit = function(event) {
                 <td>${data.product.idProduct}</td>
                 <td>${data.product.productName}</td>
                 <td>${data.product.description}</td>
-                <td>${data.product.quantities}</td>
+                <td>${data.product.quantity}</td>
                 <td>${data.product.price}</td>
                 <td><button class="edit">Editar</button> <button class="delete">Eliminar</button></td>
             </tr>`;
