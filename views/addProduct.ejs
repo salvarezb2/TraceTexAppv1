@@ -66,15 +66,8 @@
                                     <th>Descripción</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
+                                    <th>Proveedor</th>
                                     <th>Acciones</th>
-                                    <td>
-                                        <button class="edit">
-                                            <i class="fa-solid fa-pencil"></i> Editar
-                                        </button>
-                                        <button class="delete">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </button>
-                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -159,6 +152,10 @@
                 <input type="text" id="description" placeholder="Descripción" required>
                 <input type="number" id="quantity" placeholder="Cantidad" required>
                 <input type="number" id="price" placeholder="Precio" required>
+                <label for="supplierSelect">Proveedor</label>
+                <select id="supplierSelect" required>
+                    <!-- Opciones de proveedores se llenarán aquí -->
+                </select>
                 <button type="submit"><i class="fa-solid fa-plus"></i></button>
                 <button type="button" id="cancel-btn">Cancelar</button>
             </form>

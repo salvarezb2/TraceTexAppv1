@@ -1,5 +1,26 @@
+// Función para cargar proveedores en el select
+function loadSuppliers() {
+    const supplierSelect = document.getElementById('supplierSelect');
+    supplierSelect.innerHTML = ''; // Limpiar opciones anteriores
+    fetch('/getSuppliers')
+        .then(response => response.json())
+        .then(suppliers => {
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.id; 
+                option.textContent = supplier.name;
+                supplierSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error loading suppliers:', error));
+}
+
 document.getElementById('addProductButton').onclick = function() {
     document.getElementById('addProductModal').style.display = 'block';
+
+    // Cargar proveedores
+    loadSuppliers();
+
 };
 
 
@@ -20,6 +41,8 @@ document.getElementById('addProductForm').onsubmit = function(event) {
     const description = document.getElementById('description').value;
     const quantity = document.getElementById('quantity').value;
     const price = document.getElementById('price').value;
+    const idSupplier = document.getElementById('supplierSelect').value;
+    const supplierText = supplierSelect.options[supplierSelect.selectedIndex].text;
 
     fetch('/addProduct', {
         method: 'POST',
@@ -30,7 +53,8 @@ document.getElementById('addProductForm').onsubmit = function(event) {
             productName,
             description,
             quantity,
-            price
+            price,
+            idSupplier
         })
     })
     .then(response => response.json())
@@ -44,6 +68,7 @@ document.getElementById('addProductForm').onsubmit = function(event) {
                 <td>${data.product.description}</td>
                 <td>${data.product.quantity}</td>
                 <td>${data.product.price}</td>
+                <td>${supplierText}</td>
                 <td><button class="edit">Editar</button> <button class="delete">Eliminar</button></td>
             </tr>`;
             tableBody.insertAdjacentHTML('beforeend', newRow);

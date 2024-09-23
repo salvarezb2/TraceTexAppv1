@@ -1,26 +1,6 @@
-// Función para cargar proveedores en el select
-function loadSuppliers() {
-    const supplierSelect = document.getElementById('supplierSelect');
-    supplierSelect.innerHTML = ''; // Limpiar opciones anteriores
-    fetch('/getSuppliers')
-        .then(response => response.json())
-        .then(suppliers => {
-            suppliers.forEach(supplier => {
-                const option = document.createElement('option');
-                option.value = supplier.id; // Asegúrate de que este campo coincida con tu modelo
-                option.textContent = supplier.name; // Cambia esto según tu modelo
-                supplierSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error loading suppliers:', error));
-}
-
 // Abrir el modal para agregar la orden
 document.getElementById('addOrderButton').onclick = function() {
     document.getElementById('addOrderModal').style.display = 'block';
-    
-    // Cargar proveedores
-    loadSuppliers();
     
     // Llenar el primer select de productos
     const firstProductSelect = document.querySelector('.productSelect');

@@ -203,7 +203,7 @@ app.get('/addProduct', (req, res) => {
 
 //15. agregar productos
 app.post('/addProduct', (req, res) => {
-    const { productName, description, quantity, price } = req.body;
+    const { productName, description, quantity, price, idSupplier } = req.body;
 
     req.getConnection((err, connection) => {
         if (err) {
@@ -214,7 +214,8 @@ app.post('/addProduct', (req, res) => {
             productName,
             description,
             quantity,
-            price
+            price,
+            idSupplier
         };
 
         connection.query('INSERT INTO product SET ?', newProduct, (error, results) => {
