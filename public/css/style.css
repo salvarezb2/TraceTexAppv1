@@ -12,6 +12,7 @@ body{
     padding: 0 20px 30px 20px;
     margin-top: 120px;
     box-shadow: 0 7px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8em;
 }
 .login-form h1{
     text-align: left;
@@ -30,14 +31,14 @@ body{
 .btn-login{
     width: 100%;
     padding: 15px;
-    background-color: #38d1bf;
+    background-color: #0c234f;
     border: 0;
     box-sizing: border-box;
     cursor: pointer;
     font-weight: normal;
     font-size: large;
     color: #ffffff;
-    border-radius: 30px;
+    border-radius: 4px;
     text-decoration: none;
 }
 .btn-login:hover, .btn-login:active{
@@ -79,7 +80,7 @@ body{
     padding: 10px;
     border: 0;
     cursor: pointer;
-    background-color: #38d1bf;
+    background-color: #002b52;
     color: #ffffff;
     box-sizing: border-box;
     margin-top: 20px;
@@ -89,7 +90,7 @@ body{
     -moz-appearance: button;
     appearance: button;
     text-decoration: none;
-    border-radius: 30px;
+    border-radius: 4px;
 }
 .btn-save:hover, .btn-login:active{
     color: #fff;
@@ -114,7 +115,7 @@ body{
     -moz-appearance: button;
     appearance: button;
     text-decoration: none;
-    border-radius: 30px;
+    border-radius: 4px;
     text-align: center;
 }
 .btn-cancel:hover, .btn-login:active{
@@ -143,6 +144,8 @@ body{
     width: 300px;
     margin: auto;
     margin-top: 120px;
+    margin-bottom: 8em;
+
 }
 .button-container {
     display: flex;
@@ -309,6 +312,7 @@ a {
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s;
+    margin-right: 1em;
 }
 
 .btn:hover {

@@ -350,6 +350,21 @@ app.get('/getProducts', (req, res) => {
 });
 
 
+//19. Ruta para ver perfil
+app.get('/profile', (req, res) => {
+    res.render('profile', {
+        login: req.session.loggedin || false,
+        name: req.session.name || ''
+    });
+});
+
+//20. Ruta para ver configuración
+app.get('/settings', (req, res) => {
+    res.render('settings', {
+        login: req.session.loggedin || false,
+        name: req.session.name || ''
+    });
+});
 
 
 
